@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <item
+        android:id="@+id/action_tasks"
+        android:icon="@drawable/ic_list_add"
+        android:title="@string/tasks"
+        app:showAsAction="ifRoom" />
+    <item
+        android:id="@+id/action_set_map"
+        android:icon="@drawable/ic_navigation"
+        android:title="@string/map_set"
+        app:showAsAction="ifRoom" />
+    <item
+        android:id="@+id/action_save_map"
+        android:icon="@drawable/ic_navigation"
+        android:title="@string/save_map"
+        app:showAsAction="ifRoom" />
+    <item
+        android:id="@+id/action_save_location"
+        android:icon="@drawable/ic_add"
+        android:title="@string/add_route"
+        app:showAsAction="ifRoom" />
+</menu>

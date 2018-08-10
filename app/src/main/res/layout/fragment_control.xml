@@ -1,0 +1,146 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".module.main.MainActivity">
+
+    <RelativeLayout
+        android:id="@+id/layout1"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center_horizontal">
+
+        <Button
+            android:id="@+id/save_map"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="4dp"
+            android:layout_toLeftOf="@id/create_task"
+            android:drawableTop="@drawable/ic_map"
+            android:text="@string/save_map"
+            android:textSize="16sp"
+            android:visibility="gone" />
+
+        <Button
+            android:id="@+id/create_task"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="4dp"
+            android:layout_toLeftOf="@id/add"
+            android:drawableTop="@drawable/ic_new_list"
+            android:text="@string/task_create"
+            android:textSize="16sp"
+            android:visibility="gone" />
+
+        <Button
+            android:id="@+id/add"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="4dp"
+            android:layout_toLeftOf="@id/power_off"
+            android:drawableTop="@drawable/ic_add"
+            android:text="@string/add_route"
+            android:textSize="16sp"
+            android:visibility="gone" />
+
+        <Button
+            android:id="@+id/power_off"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_margin="4dp"
+            android:drawableTop="@drawable/ic_power"
+            android:text="@string/power_off"
+            android:textSize="16sp" />
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/layout1"
+        android:gravity="center_horizontal">
+
+        <Button
+            android:id="@+id/volume"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+            android:layout_margin="4dp"
+            android:layout_toLeftOf="@id/go_home"
+            android:drawableTop="@drawable/ic_volume"
+            android:text="@string/volume"
+            android:textSize="16sp" />
+
+        <Button
+            android:id="@+id/go_home"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+            android:layout_margin="4dp"
+            android:layout_toLeftOf="@id/connect"
+            android:drawableTop="@drawable/ic_home"
+            android:text="@string/go_home"
+            android:textSize="14sp" />
+
+        <Button
+            android:id="@+id/connect"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+            android:layout_margin="4dp"
+            android:layout_toLeftOf="@id/battery"
+            android:drawableTop="@drawable/ic_wifi"
+            android:text="@string/not_connect"
+            android:textSize="14sp" />
+
+        <Button
+            android:id="@+id/battery"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentTop="true"
+            android:layout_margin="4dp"
+            android:drawableTop="@drawable/ic_battery"
+            android:text="0%"
+            android:textSize="14sp" />
+
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true">
+
+        <Button
+            android:id="@+id/top"
+            android:layout_width="wrap_content"
+            android:layout_height="80dp"
+            android:layout_toRightOf="@id/left"
+            android:drawableTop="@drawable/ic_arrow_upward" />
+
+        <Button
+            android:id="@+id/down"
+            android:layout_width="wrap_content"
+            android:layout_height="80dp"
+            android:layout_below="@id/left"
+            android:layout_toRightOf="@id/left"
+            android:drawableBottom="@drawable/ic_arrow_downward" />
+
+        <Button
+            android:id="@+id/left"
+            android:layout_width="wrap_content"
+            android:layout_height="80dp"
+            android:layout_below="@id/top"
+            android:drawableLeft="@drawable/ic_arrow_back" />
+
+        <Button
+            android:id="@+id/right"
+            android:layout_width="wrap_content"
+            android:layout_height="80dp"
+            android:layout_below="@id/top"
+            android:layout_toRightOf="@id/top"
+            android:drawableRight="@drawable/ic_arrow_forward" />
+
+    </RelativeLayout>
+</RelativeLayout>

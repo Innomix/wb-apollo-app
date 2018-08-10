@@ -1,0 +1,58 @@
+<resources>
+    <string name="app_name">Apollo</string>
+
+    <!--手动控制-->
+    <string name="manual_control">手动控制</string>
+    <string name="go_home">回桩</string>
+    <string name="volume">音量</string>
+    <string name="add_route">保存坐标</string>
+    <string name="power_off">关机</string>
+    <string name="save_map">保存地图</string>
+    <string name="save_map_error">保存地图失败</string>
+    <string name="save_map_success">保存地图成功</string>
+    <string name="connect">连接</string>
+    <string name="not_connect">未连接</string>
+    <string name="connect_error">连接失败</string>
+    <string name="save_name">保存名称</string>
+    <string name="save_route">保存路线</string>
+    <string name="cmd_error">发送指令失败</string>
+    <string name="get_location_error">获取坐标失败</string>
+    <string name="power_off_success">关机成功</string>
+    <string name="power_off_error">关机失败</string>
+
+    <!--任务路线创建-->
+    <string name="task_create">编辑路线</string>
+    <string name="load_route">导入路线</string>
+    <string name="route">路线点%d</string>
+    <string name="route_point">点击下面的路线点添加到右边规划路线</string>
+    <string name="empty_task">任务列表为空，从菜单中导入任务列表</string>
+    <string name="not_edit_route">未规划路线，右边路线点为空</string>
+
+    <!--任务列表-->
+    <string name="tasks">任务列表</string>
+    <string name="get_task_error">获取任务列表失败</string>
+    <string name="exec_task">执行任务</string>
+    <string name="exec_success">执行任务开始</string>
+    <string name="exec_error">执行任务失败</string>
+    <string name="delete_success">删除任务成功</string>
+    <string name="delete_error">删除任务失败</string>
+    <string name="task_detail">任务详情</string>
+    <string name="cancel_task_success">取消任务成功</string>
+    <string name="cancel_task_error">取消任务失败</string>
+
+    <!--上传任务-->
+    <string name="task_upload">创建任务</string>
+    <string name="task_name">任务名称：</string>
+    <string name="audio_file_path">音乐文件位置：</string>
+    <string name="set_task">提交任务</string>
+    <string name="default_task">任务0</string>
+    <string name="load_task_error">加载任务失败</string>
+
+    <!--地图设置-->
+    <string name="map_set">设置地图</string>
+    <string name="map_file_path">地图文件位置：</string>
+    <string name="error_axis">坐标格式不正确</string>
+    <string name="map_set_error">设置失败,地图文件无效</string>
+    <string name="set_error">设置失败</string>
+    <string name="set_success">设置成功</string>
+</resources>
