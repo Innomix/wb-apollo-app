@@ -15,6 +15,8 @@ public interface ControlContract {
         void battery(int percent);
 
         void showVolume(int percent);
+
+        void powerOff(String msg);
     }
 
     interface Presenter extends BasePresenter<View> {

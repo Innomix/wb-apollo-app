@@ -502,6 +502,13 @@ public class ControlPresenter extends RxPresenter<View> implements Presenter {
         addSubscribe(
                 httpHelper.post(POWER_OFF_URL, new HashMap<String, Object>(), new HashMap<String, Object>())
                         .compose(RxUtil.<Response<String>>rxSchedulerHelper())
+                        .flatMap(new Function<Response<String>, Publisher<Response<String>>>() {
+                            @Override
+                            public Publisher<Response<String>> apply(Response<String> r) throws Exception {
+                                return Flowable.just(r).delay(5, TimeUnit.SECONDS);
+                            }
+                        })
+                        .compose(RxUtil.<Response<String>>rxSchedulerHelper())
                         .subscribeWith(new ResourceSubscriber<Response<String>>() {
                             BaseHttpResponse response;
 
@@ -515,9 +522,9 @@ public class ControlPresenter extends RxPresenter<View> implements Presenter {
                             private void end() {
                                 if (mView != null) {
                                     if (response != null && response.isSuccess()) {
-                                        mView.showErrorMsg(App.getInstance().getString(R.string.power_off_success));
+                                        mView.powerOff(App.getInstance().getString(R.string.power_off_success));
                                     } else {
-                                        mView.showErrorMsg(App.getInstance().getString(R.string.power_off_error));
+                                        mView.powerOff(App.getInstance().getString(R.string.power_off_error));
                                     }
                                 }
                             }

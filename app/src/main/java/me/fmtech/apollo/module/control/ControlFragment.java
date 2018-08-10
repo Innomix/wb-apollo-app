@@ -75,6 +75,7 @@ public class ControlFragment extends BaseFragment<ControlPresenter> implements C
                 getFile(REQUEST_SAVE_MAP_FILE);
                 break;
             case R.id.power_off:
+                showProgressDialog(getString(R.string.power_off_waiting));
                 mPresenter.powerOff();
                 break;
             case R.id.create_task:
@@ -209,6 +210,12 @@ public class ControlFragment extends BaseFragment<ControlPresenter> implements C
         if (seekBar != null) {
             seekBar.setProgress(percent);
         }
+    }
+
+    @Override
+    public void powerOff(String msg) {
+        cancelDialog();
+        showMsgDialog(mActivity, msg);
     }
 
     @Override

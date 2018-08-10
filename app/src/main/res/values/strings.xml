@@ -19,6 +19,7 @@
     <string name="get_location_error">获取坐标失败</string>
     <string name="power_off_success">关机成功</string>
     <string name="power_off_error">关机失败</string>
+    <string name="power_off_waiting">正在关机，请稍等</string>
 
     <!--任务路线创建-->
     <string name="task_create">编辑路线</string>
@@ -55,4 +56,5 @@
     <string name="map_set_error">设置失败,地图文件无效</string>
     <string name="set_error">设置失败</string>
     <string name="set_success">设置成功</string>
+    <string name="set_waiting">正在设置，请稍等</string>
 </resources>

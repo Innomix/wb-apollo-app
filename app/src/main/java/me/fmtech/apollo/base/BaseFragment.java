@@ -12,6 +12,7 @@ import android.view.ViewGroup;
 
 import javax.inject.Inject;
 
+import me.fmtech.apollo.R;
 import me.fmtech.apollo.app.App;
 import me.fmtech.apollo.di.component.DaggerFragmentComponent;
 import me.fmtech.apollo.di.component.FragmentComponent;
@@ -58,6 +59,10 @@ public abstract class BaseFragment<T extends BasePresenter> extends SimpleFragme
     protected ProgressDialog mProgressDialog;
 
     protected ProgressDialog showProgressDialog() {
+        return showProgressDialog(getString(R.string.set_waiting));
+    }
+
+    protected ProgressDialog showProgressDialog(String msg) {
         if (null != mProgressDialog && mProgressDialog.isShowing()) {
             mProgressDialog.dismiss();
         }
@@ -67,7 +72,7 @@ public abstract class BaseFragment<T extends BasePresenter> extends SimpleFragme
         }
 
         mProgressDialog = new ProgressDialog(mActivity);
-        mProgressDialog.setMessage("正在设置，请稍等");
+        mProgressDialog.setMessage(msg);
         mProgressDialog.setCancelable(true);
         mProgressDialog.show();
         return mProgressDialog;
