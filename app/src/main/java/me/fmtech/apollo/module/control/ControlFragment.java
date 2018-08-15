@@ -197,6 +197,8 @@ public class ControlFragment extends BaseFragment<ControlPresenter> implements C
         mConnectState.setText(text);
         if (!state) {
             showErrorMsg(getString(R.string.connect_error));
+        } else {
+            mPresenter.getBattery();
         }
     }
 

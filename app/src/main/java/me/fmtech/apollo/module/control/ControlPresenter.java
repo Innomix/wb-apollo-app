@@ -92,6 +92,7 @@ public class ControlPresenter extends RxPresenter<View> implements Presenter {
     }
 
     public void getBattery() {
+        unSubscribe();
         addSubscribe(
                 Flowable.interval(1, 10, TimeUnit.SECONDS)
                         .subscribeOn(PriorityScheduler.get().priority(5))
