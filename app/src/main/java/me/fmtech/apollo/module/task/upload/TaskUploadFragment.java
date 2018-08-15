@@ -105,7 +105,7 @@ public class TaskUploadFragment extends BaseFragment<TaskUploadPresenter> implem
                 }
 
                 if (mAudioFilePath != null) {
-                    mTaskBean.setAudio1(new File(mAudioFilePath).getName().hashCode() + ".mp3");
+                    mTaskBean.setAudio1(new File(mAudioFilePath).getName());
                 }
                 mTaskBean.setName(mTaskNameEt.getText().toString());
                 showProgressDialog();

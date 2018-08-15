@@ -151,7 +151,7 @@ public class TaskUploadPresenter extends RxPresenter<View> implements Presenter 
     private Flowable<Response<String>> getFileFlowable(String filePath) {
         File file = new File(filePath);
         RequestBody requestFile = RequestBody.create(MediaType.parse("application/octet-stream"), file);
-        final MultipartBody.Part postFile = MultipartBody.Part.createFormData("file", file.getName().hashCode() + ".mp3", requestFile);
+        final MultipartBody.Part postFile = MultipartBody.Part.createFormData("file", file.getName(), requestFile);
 
         return httpHelper.postFile(UPLOAD_URL, new HashMap<String, Object>(), postFile);
     }
