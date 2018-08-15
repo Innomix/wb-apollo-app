@@ -31,7 +31,7 @@
             android:drawableTop="@drawable/ic_new_list"
             android:text="@string/task_create"
             android:textSize="16sp"
-            android:visibility="gone" />
+            android:visibility="visible" />
 
         <Button
             android:id="@+id/add"
@@ -42,7 +42,7 @@
             android:drawableTop="@drawable/ic_add"
             android:text="@string/add_route"
             android:textSize="16sp"
-            android:visibility="gone" />
+            android:visibility="visible" />
 
         <Button
             android:id="@+id/power_off"
