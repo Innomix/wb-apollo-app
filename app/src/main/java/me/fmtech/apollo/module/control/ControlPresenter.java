@@ -372,7 +372,12 @@ public class ControlPresenter extends RxPresenter<View> implements Presenter {
                     @Override
                     public Publisher<Long> apply(Long num) throws Exception {
                         if (null != mPlatform) {
-                            mPlatform.moveBy(action);
+                            try {
+                                mPlatform.moveBy(action);
+                            } catch (Exception e) {
+                                e.printStackTrace();
+                                return Flowable.error(e);
+                            }
                         }
 
                         return Flowable.just(num);
@@ -387,7 +392,7 @@ public class ControlPresenter extends RxPresenter<View> implements Presenter {
                     public void onError(Throwable t) {
                         t.printStackTrace();
                         if (mView != null) {
-                            mView.showErrorMsg(App.getInstance().getString(R.string.cmd_error));
+                            mView.showErrorMsg(App.getInstance().getString(R.string.cmd_error) + ": " + t.getMessage());
                         }
                     }
 
