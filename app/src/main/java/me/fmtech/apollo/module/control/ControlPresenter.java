@@ -53,7 +53,6 @@ public class ControlPresenter extends RxPresenter<View> implements Presenter {
     ControlPresenter(RetrofitHelper httpHelper) {
         this.httpHelper = httpHelper;
         connect();
-        getBattery();
     }
 
     @Override
