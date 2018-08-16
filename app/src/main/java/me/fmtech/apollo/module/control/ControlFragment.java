@@ -13,6 +13,7 @@ import android.view.View.OnTouchListener;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.SeekBar;
+import android.widget.TextView;
 
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
@@ -38,6 +39,8 @@ public class ControlFragment extends BaseFragment<ControlPresenter> implements C
     protected Button mConnectState;
     @BindView(R.id.battery)
     protected Button mBattery;
+    @BindView(R.id.status)
+    protected TextView mStatus;
     public static final String PREF_LOC = "PREF_LOC";
     private Map<String, Location> mPositions = new TreeMap<>();
 
@@ -199,6 +202,7 @@ public class ControlFragment extends BaseFragment<ControlPresenter> implements C
             showErrorMsg(getString(R.string.connect_error));
         } else {
             mPresenter.getBattery();
+            mPresenter.getStatus();
         }
     }
 
@@ -218,6 +222,11 @@ public class ControlFragment extends BaseFragment<ControlPresenter> implements C
     public void powerOff(String msg) {
         cancelDialog();
         showMsgDialog(mActivity, msg);
+    }
+
+    @Override
+    public void showStatus(String msg) {
+        mStatus.setText(msg);
     }
 
     @Override

@@ -17,6 +17,8 @@ public interface ControlContract {
         void showVolume(int percent);
 
         void powerOff(String msg);
+
+        void showStatus(String msg);
     }
 
     interface Presenter extends BasePresenter<View> {
@@ -45,5 +47,7 @@ public interface ControlContract {
         void setVolume(int volume);
 
         void powerOff();
+
+        void getStatus();
     }
 }

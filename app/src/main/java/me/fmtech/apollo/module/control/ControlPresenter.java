@@ -47,6 +47,7 @@ public class ControlPresenter extends RxPresenter<View> implements Presenter {
     private AbstractSlamwarePlatform mPlatform;
     private HttpHelper httpHelper;
     private static final String VOLUME_URL = Constants.BASE_URL + "volume";
+    private static final String STATUS_URL = Constants.BASE_URL + "status";
     private static final String POWER_OFF_URL = Constants.BASE_URL + "exec/poweroff";
 
     @Inject
@@ -543,6 +544,50 @@ public class ControlPresenter extends RxPresenter<View> implements Presenter {
                             @Override
                             public void onComplete() {
                                 end();
+                            }
+                        })
+        );
+    }
+
+    @Override
+    public void getStatus() {
+        addSubscribe(
+                Flowable.interval(0, 5, TimeUnit.SECONDS)
+                        .flatMap(new Function<Long, Publisher<BaseHttpResponse>>() {
+                            @Override
+                            public Publisher<BaseHttpResponse> apply(Long aLong) throws Exception {
+                                return httpHelper.get(STATUS_URL, new HashMap<String, Object>())
+                                        .compose(RxUtil.<Response<String>>rxSchedulerHelper())
+                                        .map(new Function<Response<String>, BaseHttpResponse>() {
+                                            @Override
+                                            public BaseHttpResponse apply(Response<String> r) throws Exception {
+                                                return new Gson().fromJson(r.body(), BaseHttpResponse.class);
+                                            }
+                                        })
+                                        .onErrorReturnItem(new BaseHttpResponse() {
+                                            @Override
+                                            public String getMsg() {
+                                                return "未能连接到控制主机";
+                                            }
+                                        });
+                            }
+                        })
+                        .subscribeWith(new ResourceSubscriber<BaseHttpResponse>() {
+                            @Override
+                            public void onNext(BaseHttpResponse r) {
+                                if (r != null && mView != null) {
+                                    mView.showStatus(r.getMsg());
+                                }
+                            }
+
+                            @Override
+                            public void onError(Throwable t) {
+                                t.printStackTrace();
+                            }
+
+                            @Override
+                            public void onComplete() {
+
                             }
                         })
         );

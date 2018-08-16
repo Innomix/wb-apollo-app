@@ -143,4 +143,14 @@
             android:drawableRight="@drawable/ic_arrow_forward" />
 
     </RelativeLayout>
+
+    <TextView
+        android:id="@+id/status"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="8dp"
+        android:textSize="14sp"
+        tools:text="控制机状态" />
 </RelativeLayout>
