@@ -457,11 +457,15 @@ public class ControlPresenter extends RxPresenter<View> implements Presenter {
                         .subscribeWith(new ResourceSubscriber<Response<String>>() {
                             @Override
                             public void onNext(Response<String> r) {
-                                VolumeBean volume = new Gson().fromJson(r.body(), VolumeBean.class);
-                                if (volume != null && volume.isSuccess()) {
-                                    if (mView != null) {
-                                        mView.showVolume(volume.getVolume());
+                                try {
+                                    VolumeBean volume = new Gson().fromJson(r.body(), VolumeBean.class);
+                                    if (volume != null && volume.isSuccess()) {
+                                        if (mView != null) {
+                                            mView.showVolume(volume.getVolume());
+                                        }
                                     }
+                                } catch (Exception e) {
+
                                 }
                             }
 
