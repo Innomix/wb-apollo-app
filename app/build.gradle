@@ -10,8 +10,20 @@ android {
         versionName "1.00"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
     }
-    buildTypes {
+    signingConfigs {
         release {
+            storeFile file("apollo.jks")
+            storePassword "webank000"
+            keyAlias "key0"
+            keyPassword "webank000"
+        }
+    }
+    buildTypes {
+        debug {
+            signingConfig signingConfigs.release
+        }
+        release {
+            signingConfig signingConfigs.release
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
