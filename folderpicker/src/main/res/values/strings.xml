@@ -1,8 +1,0 @@
-<resources>
-    <string name="app_name">Folder Picker</string>
-    <string name="up">往上</string>
-    <string name="neww">新建</string>
-    <string name="select">选择</string>
-    <string name="cancel">取消</string>
-    <string name="title">选择目录</string>
-</resources>
