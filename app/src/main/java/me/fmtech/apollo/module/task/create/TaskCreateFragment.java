@@ -2,6 +2,7 @@ package me.fmtech.apollo.module.task.create;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.os.Environment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.helper.ItemTouchHelper;
@@ -12,10 +13,11 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.EditText;
 
+import com.leon.lfilepickerlibrary.LFilePicker;
+
 import java.util.List;
 
 import butterknife.BindView;
-import lib.folderpicker.FolderPicker;
 import me.fmtech.apollo.R;
 import me.fmtech.apollo.base.BaseFragment;
 import me.fmtech.apollo.model.bean.LocationBean;
@@ -96,21 +98,29 @@ public class TaskCreateFragment extends BaseFragment<TaskCreatePresenter> implem
     private static final int REQUEST_LOAD_TASK_FILE = 101;
 
     private void getFile(int requestCode, boolean pickFiles) {
-        Intent intent = new Intent(mActivity, FolderPicker.class);
-        intent.putExtra("pickFiles", pickFiles);
-        startActivityForResult(intent, requestCode);
+        new LFilePicker()
+                .withSupportFragment(this)
+                .withRequestCode(requestCode)
+                .withTitle(pickFiles ? "选择任务文件" : "选择保存位置")
+                .withStartPath(Environment.getExternalStorageDirectory().getPath())
+                .withMutilyMode(false)
+                .withChooseMode(pickFiles)
+                .start();
     }
 
     public void onActivityResult(int requestCode, int resultCode, Intent intent) {
         if (resultCode == Activity.RESULT_OK) {
-            String file = intent.getExtras().getString("data");
             if (REQUEST_SAVE_TASK_FILE == requestCode) {
+                String file = intent.getStringExtra("path");
                 String task = mTaskName.getText().toString();
                 file += "/" + task + ".txt";
                 List<LocationBean> data = mRoutePlanAdapter.getList();
                 mPresenter.saveTask(file, new TaskBean(task, data));
             } else if (REQUEST_LOAD_TASK_FILE == requestCode) {
-                mPresenter.loadTask(file);
+                List<String> list = intent.getStringArrayListExtra("paths");
+                if (null != list && list.size() == 1) {
+                    mPresenter.loadTask(list.get(0));
+                }
             }
         }
     }

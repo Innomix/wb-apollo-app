@@ -2,15 +2,18 @@ package me.fmtech.apollo.module.task.map;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.os.Environment;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.TextView;
 
+import com.leon.lfilepickerlibrary.LFilePicker;
 import com.slamtec.slamware.robot.Location;
+
+import java.util.List;
 
 import butterknife.BindView;
 import butterknife.OnClick;
-import lib.folderpicker.FolderPicker;
 import me.fmtech.apollo.R;
 import me.fmtech.apollo.base.BaseFragment;
 
@@ -76,17 +79,25 @@ public class MapSetFragment extends BaseFragment<MapSetPresenter> implements Map
     private static final int REQUEST_MAP_FILE = 101;
 
     private void getFile(int requestCode) {
-        Intent intent = new Intent(mActivity, FolderPicker.class);
-        intent.putExtra("pickFiles", true);
-        startActivityForResult(intent, requestCode);
+        new LFilePicker()
+                .withSupportFragment(this)
+                .withRequestCode(requestCode)
+                .withTitle("选择地图文件")
+                .withStartPath(Environment.getExternalStorageDirectory().getPath())
+                .withMutilyMode(false)
+                .withChooseMode(true)
+                .start();
     }
 
     public void onActivityResult(int requestCode, int resultCode, Intent intent) {
         if (resultCode == Activity.RESULT_OK) {
-            String file = intent.getExtras().getString("data");
             if (REQUEST_MAP_FILE == requestCode) {
-                mMapFilePath = file;
-                mMapFilePathTv.setText(getText(R.string.map_file_path) + file);
+                List<String> list = intent.getStringArrayListExtra("paths");
+                if (null != list && list.size() == 1) {
+                    String file = list.get(0);
+                    mMapFilePath = file;
+                    mMapFilePathTv.setText(getText(R.string.map_file_path) + file);
+                }
             }
         }
     }

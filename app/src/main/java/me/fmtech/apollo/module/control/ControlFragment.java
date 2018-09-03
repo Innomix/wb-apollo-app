@@ -6,6 +6,7 @@ import android.app.Dialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Environment;
 import android.text.TextUtils;
 import android.view.MotionEvent;
 import android.view.View;
@@ -17,6 +18,7 @@ import android.widget.TextView;
 
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
+import com.leon.lfilepickerlibrary.LFilePicker;
 import com.slamtec.slamware.robot.Location;
 
 import java.util.Map;
@@ -24,7 +26,6 @@ import java.util.TreeMap;
 
 import butterknife.BindView;
 import butterknife.OnClick;
-import lib.folderpicker.FolderPicker;
 import me.fmtech.apollo.R;
 import me.fmtech.apollo.app.Constants;
 import me.fmtech.apollo.base.BaseFragment;
@@ -241,14 +242,19 @@ public class ControlFragment extends BaseFragment<ControlPresenter> implements C
     private static final int REQUEST_SAVE_MAP_FILE = 100;
 
     private void getFile(int requestCode) {
-        Intent intent = new Intent(mActivity, FolderPicker.class);
-        intent.putExtra("pickFiles", false);
-        startActivityForResult(intent, requestCode);
+        new LFilePicker()
+                .withSupportFragment(this)
+                .withRequestCode(requestCode)
+                .withTitle("选择保存位置")
+                .withStartPath(Environment.getExternalStorageDirectory().getPath())
+                .withMutilyMode(false)
+                .withChooseMode(false)
+                .start();
     }
 
     public void onActivityResult(int requestCode, int resultCode, Intent intent) {
         if (resultCode == Activity.RESULT_OK) {
-            String file = intent.getExtras().getString("data");
+            String file = intent.getExtras().getString("path");
             if (REQUEST_SAVE_MAP_FILE == requestCode) {
                 mPresenter.saveMap(file);
             }

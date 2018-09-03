@@ -2,6 +2,7 @@ package me.fmtech.apollo.module.task.upload;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.os.Environment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.text.TextUtils;
@@ -12,11 +13,13 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.TextView;
 
+import com.leon.lfilepickerlibrary.LFilePicker;
+
 import java.io.File;
+import java.util.List;
 
 import butterknife.BindView;
 import butterknife.OnClick;
-import lib.folderpicker.FolderPicker;
 import me.fmtech.apollo.R;
 import me.fmtech.apollo.app.Constants;
 import me.fmtech.apollo.base.BaseFragment;
@@ -120,14 +123,25 @@ public class TaskUploadFragment extends BaseFragment<TaskUploadPresenter> implem
     private static final int REQUEST_AUDIO_FILE = 101;
 
     private void getFile(int requestCode) {
-        Intent intent = new Intent(mActivity, FolderPicker.class);
-        intent.putExtra("pickFiles", true);
-        startActivityForResult(intent, requestCode);
+        new LFilePicker()
+                .withSupportFragment(this)
+                .withRequestCode(requestCode)
+                .withTitle("选择任务文件")
+                .withStartPath(Environment.getExternalStorageDirectory().getPath())
+                .withMutilyMode(false)
+                .withChooseMode(true)
+                .start();
     }
 
     public void onActivityResult(int requestCode, int resultCode, Intent intent) {
         if (resultCode == Activity.RESULT_OK) {
-            String file = intent.getExtras().getString("data");
+            String file = "";
+            List<String> list = intent.getStringArrayListExtra("paths");
+            if (null != list && list.size() == 1) {
+                file = list.get(0);
+            } else {
+                return;
+            }
             if (REQUEST_TASK_FILE == requestCode) {
                 mPresenter.loadTask(file);
             } else if (REQUEST_AUDIO_FILE == requestCode) {
