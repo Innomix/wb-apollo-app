@@ -57,12 +57,6 @@ public class ControlFragment extends BaseFragment<ControlPresenter> implements C
 
     @Override
     protected void initEventAndData() {
-        String s = PrefUtil.getString(mContext, PREF_LOC);
-        if (!TextUtils.isEmpty(s)) {
-            Map<String, Location> m = new Gson().fromJson(s, new TypeToken<Map<String, Location>>() {
-            }.getType());
-            mPositions.putAll(m);
-        }
         mView.findViewById(R.id.left).setOnTouchListener(onTouchListener);
         mView.findViewById(R.id.right).setOnTouchListener(onTouchListener);
         mView.findViewById(R.id.top).setOnTouchListener(onTouchListener);
